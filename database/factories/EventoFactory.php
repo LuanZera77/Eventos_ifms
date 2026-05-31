@@ -22,7 +22,7 @@ class EventoFactory extends Factory
             'nome' => $this->faker->sentence(3),
             'local' => $this->faker->address(),
             'status' => $this->faker->randomElement(['aberto', 'em_andamento', 'fechado', 'encerrado']),
-            'data' => $this->faker->dataTimeThisYear()->format('Y-m-d'),
+            'data' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
         ];
     }
 }

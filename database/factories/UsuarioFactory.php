@@ -22,8 +22,8 @@ class UsuarioFactory extends Factory
             'nome' => $this->faker->name(),
             'cpf' => $this->faker->numerify('###########'),
             'email' => $this->faker->unique()->safeEmail(),
-            'password'=> Hash::make(),
-            'tipo' => $this->faker->ramdomElement(['servidor', 'estudante','externo']),
+            'password'=> Hash::make('password'),
+            'tipo' => $this->faker->randomElement(['servidor', 'estudante','externo']),
         ];
     }
 }
