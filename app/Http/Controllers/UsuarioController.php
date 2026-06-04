@@ -12,7 +12,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = Usuario::all();
+        return view('usuario.index', compact('usuarios'));
     }
 
     /**
@@ -20,7 +21,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuario.create');
     }
 
     /**
@@ -28,23 +29,35 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'nome'=>'required|string|max:255',
+        'cpf'=>'required|string|max:255',
+        'email'=>'required|string|max:255',
+        'passaword'=>'required|string|max:255',
+        'tipo'=>'required|in:servidor, estudante|externo',
+
+      ]);
+      Usuario::create($request->all());
+
+      return redirect()->rout('usuario.idx')->with('success','Usuario cadastrado!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Usuario $usuario)
+    public function show(string $id)
     {
-        //
+        $usuario = Usuario::findOrfail($id);
+        return view('usuario.show',compact('usuario'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Usuario $usuario)
+    public function edit(string $id)
     {
-        //
+        $usuraio = Usuario::findOrfail($id);
+        return view('usuario.edit', compact('usuariop'));
     }
 
     /**
@@ -52,14 +65,24 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-        //
+       $request -> validate([
+        'nome'=>'required|string|max:255',
+        'cpf'=>'required|string|max:255',
+        'email'=>'required|string|max:255',
+        'password'=>'required|max:255',
+        'tipo'=>'required|in:servidor, estudante|externo',
+       ]);
+       $usuario->update($request->all());
+       return redirect()->route('usuraio.indx')->with('sucess','Usuario Atualizado');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy( string $id)
     {
-        //
+        $usuario = Usuario::findOrfail($id);
+        $usuario->delete();
+        return redirect()->route('usuario.index')->with('Usuario Apagado!');
     }
 }

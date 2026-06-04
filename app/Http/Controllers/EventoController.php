@@ -14,7 +14,7 @@ class EventoController extends Controller
     public function index()
     {
         $eventos = Evento::all();
-        return view('evento.index', compact($eventos));
+        return view('evento.index', compact('eventos'));
     }
 
     /**
@@ -83,6 +83,11 @@ class EventoController extends Controller
     public function destroy(string $id)
     {
         $evento = Evento::findOrFail($id);
+            if ($evento->inscricoes()->count()>0){
+                return redirect()->route('eventos.index')->withErrors([
+                    'error'=>'Este evento não pode ser excluido porque á possui participantes'
+                ]);
+            }
         $evento->delete();
         return redirect()->route('evento.index')->with('Evento Apagado!');
     }

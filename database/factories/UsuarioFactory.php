@@ -24,6 +24,6 @@ class UsuarioFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password'=> Hash::make('password'),
             'tipo' => $this->faker->randomElement(['servidor', 'estudante','externo']),
-        ];
+        ]; 
     }
 }
