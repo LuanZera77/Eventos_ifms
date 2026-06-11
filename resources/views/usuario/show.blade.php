@@ -1,6 +1,7 @@
 @extends('layouts.index')
 
 @section('content')
+    @include('components.msgs')
     <div class="row g-4">
         <div class="col-md-5 justify-content-center">
             <div class="card shadow-sm border-0">
@@ -19,7 +20,8 @@
                                 {{ ucfirst($usuario->tipo) }}
                             </span>
                         </li>
-                        <li class="list-group-item px-0"><strong>Cadastrado em:</strong> {{ \Carbon\Carbon::parse($usuario->created_at)->format('d/m/Y') }}</li>
+                        <li class="list-group-item px-0"><strong>Cadastrado em:</strong>
+                            {{ \Carbon\Carbon::parse($usuario->created_at)->format('d/m/Y') }}</li>
                     </ul>
 
                     <div class="d-grid gap-2">

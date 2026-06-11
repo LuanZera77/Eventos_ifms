@@ -48,7 +48,7 @@ class UsuarioController extends Controller
      */
     public function edit(string $id)
     {
-        $usuraio = Usuario::findOrfail($id);
+        $usuario = Usuario::findOrfail($id);
         return view('usuario.edit', compact('usuario'));
     }
 
@@ -58,7 +58,7 @@ class UsuarioController extends Controller
     public function update(Request $request, Usuario $usuario)
     {
        $usuario->update($request->all());
-       return redirect()->route('usuraio.indx')->with('sucess','Usuario Atualizado');
+       return redirect()->route('usuario.index')->with('sucess','Usuario Atualizado');
     }
 
     /**
@@ -66,8 +66,9 @@ class UsuarioController extends Controller
      */
     public function destroy( string $id)
     {
-        $usuario = Usuario::findOrfail($id);
-        $usuario->delete();
-        return redirect()->route('usuario.index')->with('Usuario Apagado!');
+    $usuario = Usuario::findOrFail($id);
+    $usuario->inscricoes()->delete();
+    $usuario->delete();
+    return redirect()->route('usuario.index')->with('success', 'Usuário e seu histórico de inscrições foram removidos!');
     }
 }

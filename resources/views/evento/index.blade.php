@@ -2,6 +2,7 @@
 
 @section('title', 'Eventos')
 @section('content')
+    @include('components.msgs')
     <div class="card shadow-sm">
         <div class="card-hearder bg-primary text-white d-flex justify-content-between align-item-center">
             <h5 class="mb-0">Eventos Cadastrados</h5>
@@ -30,8 +31,15 @@
                             <td>{{ $evento->status }}</td>
                             <td>
                                 <a href="{{ route('evento.show', $evento->id) }}" class="btn btn-sm btn-primary">Ver</a>
-                                <a href="{{route('evento.edit', $evento->id)}}" class="btn btn-sm btn-warning">Editar</a>
-                                <button type="button" class="btn btn-sm btn-danger" onclick="return confirm('Excluir evento?')">Excluir</button>
+                                <a href="{{ route('evento.edit', $evento->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                                <form action="{{ route('evento.destroy', $evento->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Apagar Evento?')">
+                                        Excluir
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

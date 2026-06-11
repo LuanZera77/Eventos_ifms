@@ -8,6 +8,7 @@
                     <h5 class="mb-0 fw-bold">Cadastrar Novo Usuário</h5>
                 </div>
                 <div class="card-body p-4">
+                   @include('components.msgs')
                     <form action="{{ route('usuario.store') }}" method="POST">
                         @csrf
 

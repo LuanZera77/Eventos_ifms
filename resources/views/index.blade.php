@@ -1,6 +1,7 @@
 @extends('layouts.index')
 
 @section('content')
+    @include('components.msgs')
 
     <div class="row mb-4 align-items-center">
         <div class="col-md-8">
@@ -32,7 +33,8 @@
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center">
             <h5 class="mb-0 fw-bold">👥 Últimas Inscrições Realizadas</h5>
-            <button type="button" class="btn btn-success btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#modalNovaInscricao">
+            <button type="button" class="btn btn-success btn-sm fw-bold" data-bs-toggle="modal"
+                data-bs-target="#modalNovaInscricao">
                 + Nova Inscrição
             </button>
         </div>
@@ -52,11 +54,13 @@
                         @foreach ($inscricoes as $inscricao)
                             <tr>
                                 <td class="ps-4">
-                                    <span class="d-block fw-bold text-dark">{{$inscricao->usuario->nome}}</span>
-                                    <small class="text-muted">{{$inscricao->usuario->email}}</small>
+                                    <span class="d-block fw-bold text-dark">{{ $inscricao->usuario->nome }}</span>
+                                    <small class="text-muted">{{ $inscricao->usuario->email }}</small>
                                 </td>
-                                <td>{{$inscricao->usuario->cpf}}</td>
-                                <td><span class="badge bg-primary-subtle text-primary fw-semibold">{{$inscricao->evento->nome}}</span></td>
+                                <td>{{ $inscricao->usuario->cpf }}</td>
+                                <td><span
+                                        class="badge bg-primary-subtle text-primary fw-semibold">{{ $inscricao->evento->nome }}</span>
+                                </td>
                                 <td>{{ \Carbon\Carbon::parse($inscricao->created_at)->format('d/m/Y H:i') }}</td>
                                 <td class="text-center pe-4">
                                     <form action="#" method="POST" class="d-inline">
@@ -76,12 +80,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalNovaInscricao" tabindex="-1" aria-labelledby="modalNovaInscricaoLabel" aria-hidden="true">
+    <div class="modal fade" id="modalNovaInscricao" tabindex="-1" aria-labelledby="modalNovaInscricaoLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">
                     <h5 class="modal-title id="modalNovaInscricaoLabel">📝 Registrar Nova Inscrição</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
 
                 <form action="{{ route('inscricoes.store') }}" method="POST">
@@ -90,7 +96,8 @@
                     <div class="modal-body p-4">
                         <div class="mb-3">
                             <label for="cpf" class="form-label fw-bold">CPF do Participante:</label>
-                            <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                            <input type="text" class="form-control form-control-lg" id="cpf" name="cpf"
+                                placeholder="000.000.000-00" required>
                             <div class="form-text">O participante precisa estar previamente cadastrado no sistema.</div>
                         </div>
 
@@ -98,13 +105,15 @@
                             <label for="evento_id" class="form-label fw-bold">Selecione o Evento:</label>
                             <select class="form-select select-lg" id="evento_id" name="evento_id" required>
                                 <option value="" disabled selected>Escolha um evento ativo...</option>
-                                @foreach($eventos as $evento)
-                                    <option value="{{ $evento->id }}" {{ $evento->status !== 'aberto' ? 'disabled' : '' }}>
+                                @foreach ($eventos as $evento)
+                                    <option value="{{ $evento->id }}"
+                                        {{ $evento->status !== 'aberto' ? 'disabled' : '' }}>
                                         {{ $evento->nome }} (Status: {{ ucfirst($evento->status) }})
                                     </option>
                                 @endforeach
                             </select>
-                            <small class="text-danger d-block mt-1">Eventos com status diferente de "Aberto" estarão desabilitados.</small>
+                            <small class="text-danger d-block mt-1">Eventos com status diferente de "Aberto" estarão
+                                desabilitados.</small>
                         </div>
                     </div>
 

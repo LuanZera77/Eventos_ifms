@@ -3,6 +3,7 @@
 @section('title', 'detalhes')
 
 @section('content')
+    @include('components.msgs')
 
     <div class="row g-4">
         <div class="col-md-5">

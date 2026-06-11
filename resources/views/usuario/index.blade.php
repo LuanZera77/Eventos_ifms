@@ -1,6 +1,7 @@
 @extends('layouts.index')
 
 @section('content')
+    @include('components.msgs')
 
     <div class="row mb-4 align-items-center">
         <div class="col-md-8">
@@ -43,24 +44,28 @@
                                     {{ $usuario->email }}
                                 </td>
                                 <td>
-                                    @if($usuario->tipo === 'estudante')
+                                    @if ($usuario->tipo === 'estudante')
                                         <span class="badge bg-success-subtle text-success fw-semibold">Estudante</span>
                                     @elseif($usuario->tipo === 'servidor')
                                         <span class="badge bg-info-subtle text-info fw-semibold">Servidor</span>
                                     @else
-                                        <span class="badge bg-secondary-subtle text-secondary fw-semibold">{{ ucfirst($usuario->tipo) }}</span>
+                                        <span
+                                            class="badge bg-secondary-subtle text-secondary fw-semibold">{{ ucfirst($usuario->tipo) }}</span>
                                     @endif
                                 </td>
                                 <td class="text-center pe-4">
-                                    <a href="{{ route('usuario.show', $usuario->id) }}" class="btn btn-sm btn-info text-white">
+                                    <a href="{{ route('usuario.show', $usuario->id) }}"
+                                        class="btn btn-sm btn-info text-white">
                                         Visualizar
                                     </a>
 
-                                    <a href="{{ route('usuario.edit', $usuario->id) }}" class="btn btn-sm btn-warning text-white">
+                                    <a href="{{ route('usuario.edit', $usuario->id) }}"
+                                        class="btn btn-sm btn-warning text-white">
                                         Editar
                                     </a>
 
-                                    <form action="{{ route('usuario.destroy', $usuario->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('usuario.destroy', $usuario->id) }}" method="POST"
+                                        class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-outline-danger"

@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body p-4">
 
-                    {{-- @include('partials.mensagens') --}}
+                    @include('components.msgs')
 
                     <form action="{{ route('evento.update', $evento->id) }}" method="POST">
                         @csrf
