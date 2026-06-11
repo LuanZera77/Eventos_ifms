@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
             <div class="container">
-                <a class="navbar-brand fw-bold text-info" href="{{ route('evento.index') }}">
+                <a class="navbar-brand fw-bold text-info" href="{{ route('index') }}">
                     IFMS Eventos
                 </a>
 
@@ -25,22 +25,22 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ route('evento.index') }}">
+                            <a class="nav-link" href="{{ route('evento.index') }}">
                                 Eventos
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link"
-                                href="">
+                            <a class="nav-link" href="">
                                 Nova Inscrição
                             </a>
                         </li>
                     </ul>
 
                     <span class="navbar-text text-white-50 fs-7">
-                        Painel Administrativo
+                        <a class="nav-link" href="{{route('index')}}">
+                            Painel Administrativo
+                        </a>
                     </span>
                 </div>
             </div>

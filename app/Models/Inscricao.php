@@ -17,4 +17,8 @@ class Inscricao extends Model
     {
         return $this->belongsTo(Usuario::class, 'usuario_id');
     }
+    public function evento()
+    {
+        return $this->belongsTo(Evento::class, 'evento_id');
+    }
 }

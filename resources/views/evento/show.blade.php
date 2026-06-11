@@ -18,8 +18,8 @@
                     <p class="text-muted mb-4">Informações gerais sobre o agendamento no sistema.</p>
 
                     <ul class="list-group list-group-flush mb-4">
-                        <li class="list-group-item px-0"><strong>📍 Local:</strong> {{ $evento->local }}</li>
-                        <li class="list-group-item px-0"><strong>📅 Data:</strong>
+                        <li class="list-group-item px-0"><strong>Local:</strong> {{ $evento->local }}</li>
+                        <li class="list-group-item px-0"><strong>Data:</strong>
                             {{ \Carbon\Carbon::parse($evento->data)->format('d/m/Y') }}</li>
                     </ul>
 
