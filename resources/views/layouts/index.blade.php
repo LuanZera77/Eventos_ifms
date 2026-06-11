@@ -35,10 +35,16 @@
                                 Nova Inscrição
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('usuario.index') }}">
+                                Usuários
+                            </a>
+                        </li>
+
                     </ul>
 
                     <span class="navbar-text text-white-50 fs-7">
-                        <a class="nav-link" href="{{route('index')}}">
+                        <a class="nav-link" href="{{ route('index') }}">
                             Painel Administrativo
                         </a>
                     </span>

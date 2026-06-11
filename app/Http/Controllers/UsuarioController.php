@@ -29,17 +29,9 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
-        'nome'=>'required|string|max:255',
-        'cpf'=>'required|string|max:255',
-        'email'=>'required|string|max:255',
-        'passaword'=>'required|string|max:255',
-        'tipo'=>'required|in:servidor, estudante|externo',
-
-      ]);
       Usuario::create($request->all());
 
-      return redirect()->rout('usuario.idx')->with('success','Usuario cadastrado!');
+      return redirect()->route('usuario.index')->with('success','Usuario cadastrado!');
     }
 
     /**
@@ -57,7 +49,7 @@ class UsuarioController extends Controller
     public function edit(string $id)
     {
         $usuraio = Usuario::findOrfail($id);
-        return view('usuario.edit', compact('usuariop'));
+        return view('usuario.edit', compact('usuario'));
     }
 
     /**
@@ -65,13 +57,6 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-       $request -> validate([
-        'nome'=>'required|string|max:255',
-        'cpf'=>'required|string|max:255',
-        'email'=>'required|string|max:255',
-        'password'=>'required|max:255',
-        'tipo'=>'required|in:servidor, estudante|externo',
-       ]);
        $usuario->update($request->all());
        return redirect()->route('usuraio.indx')->with('sucess','Usuario Atualizado');
     }
