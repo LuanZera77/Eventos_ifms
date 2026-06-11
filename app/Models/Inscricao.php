@@ -9,7 +9,12 @@ class Inscricao extends Model
 {
     use HasFactory;
 
-    protected $table = "inscricoes";
+    protected $table = 'inscricaos';
 
-    protected $fillable = ['evento_id', 'usuario_id'];
+    protected $fillable = ['usuario_id', 'evento_id'];
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'usuario_id');
+    }
 }

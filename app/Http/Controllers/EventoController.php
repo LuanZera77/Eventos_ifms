@@ -31,14 +31,7 @@ class EventoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nome' => 'required|string|max:255',
-            'local' => 'required|string|max:255',
-            'status' => 'required|in:aberto,em_andamento|fechado|encerrado',
-            'date' => 'required|date',
-        ]);
         Evento::create($request->all());
-
         return redirect()->route('evento.index')->with('success', 'Evento Cadastrado!');
     }
 
@@ -48,7 +41,8 @@ class EventoController extends Controller
     public function show(string $id)
     {
         $evento = Evento::findOrFail($id);
-        return view('evento.show', compact('evento'));
+        $inscricoes = $evento->inscricoes()->with('usuario')->get();
+        return view('evento.show', compact('evento', 'inscricoes'));
     }
 
     /**
@@ -66,13 +60,6 @@ class EventoController extends Controller
     public function update(Request $request, string $id)
     {
         $evento = Evento::findOrFail($id);
-        $request->validate([
-           'nome' => 'required|string|max:255',
-            'local' => 'required|string|max:255',
-            'status' => 'required|in:aberto,em_andamento|fechado|encerrado',
-            'date' => 'required|date',
-        ]);
-
         $evento->update($request->all());
         return redirect()->route('evento.index')->with('sucess', 'Evento Atualizado');
     }
@@ -86,6 +73,7 @@ class EventoController extends Controller
             if ($evento->inscricoes()->count()>0){
                 return redirect()->route('eventos.index')->withErrors([
                     'error'=>'Este evento não pode ser excluido porque á possui participantes'
+
                 ]);
             }
         $evento->delete();

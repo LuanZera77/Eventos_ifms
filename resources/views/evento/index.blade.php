@@ -30,8 +30,8 @@
                             <td>{{ $evento->status }}</td>
                             <td>
                                 <a href="{{ route('evento.show', $evento->id) }}" class="btn btn-sm btn-primary">Ver</a>
-                                <a href="route('evento.edit', $evento->id)" class="btn btn-sm btn-warning">Editar</a>
-                                <button type="button" class="btn btn-sm btn-danger" onclick="return confirm('Excluit evento?')">Excluir</button>
+                                <a href="{{route('evento.edit', $evento->id)}}" class="btn btn-sm btn-warning">Editar</a>
+                                <button type="button" class="btn btn-sm btn-danger" onclick="return confirm('Excluir evento?')">Excluir</button>
                             </td>
                         </tr>
                     @endforeach
