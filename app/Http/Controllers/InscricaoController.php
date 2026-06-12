@@ -10,80 +10,35 @@ use Illuminate\Http\Request;
 class InscricaoController extends Controller
 {
 
-    public function index() {}
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index()
     {
-        //
+        $inscricoes = Inscricao::with(['usuario', 'evento'])->get();
+        return view('inscricoes.index', compact('inscricoes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
-            'usuario_id' => 'requirid|exists:usuario,id',
-            'usuario_id' => 'requirid|exists:usuario,id',
-        ]);
 
-        $usuarioId = $request->input('usuario_id');
+        $cpf = $request->input('cpf');
         $eventoId = $request->input('evento_id');
-
-        $evento = Evento::findOrFail($eventoId);
-
-        if ($evento->status !== 'aberto') {
-            return redirect()->back()->withErrors(['error' => 'Não é possível se inscrever. Evento' . $evento->status . '.']);
-        }
-
-        $inscricaoExiste = Inscricao::where('usuario_id', $usuarioId)
-                            ->where('evento_id', $eventoId)
-                            ->exists();
-        if($inscricaoExiste){
+        $usuario = Usuario::where('cpf', $cpf)->first();
+        if (!$usuario) {
             return redirect()->back()->withErrors([
-                'error' => 'Você já está inscrito neste evento!'
+                'error' => 'Não foi possível realizar a inscrição. O CPF informado não está cadastrado no sistema.'
             ]);
         }
+        $evento = Evento::findOrFail($eventoId);
         Inscricao::create([
-            'usuario_id' =>$usuarioId,
+            'usuario_id' => $usuario->id,
             'evento_id' => $eventoId,
         ]);
-
-        return redirect()->back()->with('sucess', 'Inscrição realizada com sucesso!');
+        return redirect()->back()->with('success', 'Inscrição realizada com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Inscricao $inscricao)
+    public function destroy(string $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Inscricao $inscricao)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Inscricao $inscricao)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Inscricao $inscricao)
-    {
-        //
+        $inscricao = Inscricao::findOrFail($id);
+        $inscricao->delete();
+        return redirect()->back()->with('success', 'Inscrição cancelada e removida com sucesso!');
     }
 }

@@ -23,18 +23,7 @@
                         <li class="list-group-item px-0"><strong>Data:</strong>
                             {{ \Carbon\Carbon::parse($evento->data)->format('d/m/Y') }}</li>
                     </ul>
-
-                    @if ($evento->status === 'aberto')
-                        <button type="button" class="btn btn-success btn-lg w-100 fw-bold mb-2" data-bs-toggle="modal"
-                            data-bs-target="#modalInscricao">
-                            Realizar Inscrição
-                        </button>
-                    @else
-                        <button type="button" class="btn btn-secondary btn-lg w-100 fw-bold mb-2" disabled>
-                            Inscrições Bloqueadas
-                        </button>
-                    @endif
-
+                    
                     <a href="{{ route('evento.index') }}" class="btn btn-outline-secondary w-100">Voltar para a Lista</a>
                 </div>
             </div>
@@ -63,41 +52,6 @@
                         </li>
                     @endforelse
                 </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalInscricao" tabindex="-1" aria-labelledby="modalInscricaoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title" id="modalInscricaoLabel">📝 Inscrição Rápida</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                {{-- {{ route('inscricoes.store') }} --}}
-                <form action="" method="POST">
-                    @csrf
-
-                    <input type="hidden" name="evento_id" value="{{ $evento->id }}">
-
-                    <div class="modal-body p-4">
-                        <p class="text-muted">Você está se inscrevendo no evento:<br><strong
-                                class="text-dark">{{ $evento->nome }}</strong></p>
-
-                        <div class="mb-3">
-                            <label for="cpf" class="form-label fw-bold">Informe o seu CPF:</label>
-                            <input type="text" class="form-control form-control-lg" id="cpf" name="cpf"
-                                placeholder="000.000.000-00" required>
-                            <div class="form-text">Digite apenas os números ou com pontos e hífen.</div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer bg-light">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success fw-bold px-4">Confirmar Inscrição</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

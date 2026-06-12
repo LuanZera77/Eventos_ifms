@@ -50,7 +50,12 @@
 
                         <div class="d-flex justify-content-end gap-2">
                             <a href="{{ route('evento.index') }}" class="btn btn-outline-secondary">Cancelar Alterações</a>
-                            <button type="submit" class="btn btn-warning px-4 text-dark fw-bold">Atualizar Evento</button>
+                            <form action="{{ route('evento.update', $evento->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+
+                                <button type="submit" class="btn btn-warning">Atualizar Evento</button>
+                            </form>
                         </div>
                     </form>
 

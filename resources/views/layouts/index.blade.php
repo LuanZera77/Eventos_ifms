@@ -29,12 +29,6 @@
                                 Eventos
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                Nova Inscrição
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('usuario.index') }}">
                                 Usuários

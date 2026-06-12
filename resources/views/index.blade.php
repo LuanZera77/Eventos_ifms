@@ -63,11 +63,10 @@
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($inscricao->created_at)->format('d/m/Y H:i') }}</td>
                                 <td class="text-center pe-4">
-                                    <form action="#" method="POST" class="d-inline">
+                                    <form action="{{ route('inscricoes.destroy', $inscricao->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger"
-                                            onclick="return confirm('Cancelar esta inscrição?')">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Cancelar esta inscrição?')">
                                             Cancelar
                                         </button>
                                     </form>
@@ -112,8 +111,6 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <small class="text-danger d-block mt-1">Eventos com status diferente de "Aberto" estarão
-                                desabilitados.</small>
                         </div>
                     </div>
 

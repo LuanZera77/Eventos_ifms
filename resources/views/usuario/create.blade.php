@@ -8,7 +8,7 @@
                     <h5 class="mb-0 fw-bold">Cadastrar Novo Usuário</h5>
                 </div>
                 <div class="card-body p-4">
-                   @include('components.msgs')
+                    @include('components.msgs')
                     <form action="{{ route('usuario.store') }}" method="POST">
                         @csrf
 
@@ -44,7 +44,6 @@
                             <label for="password" class="form-label fw-bold">Senha</label>
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Digite uma senha segura" required>
-                            <div class="form-text">A senha deve conter no mínimo 6 caracteres.</div>
                         </div>
 
                         <hr class="text-muted my-4">
